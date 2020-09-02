@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onResponse(call: Call<List<SuperHeroe>>, response: Response<List<SuperHeroe>>) {
-                    Log.d("Error",response.body().toString())
+                    Log.d("Datos",response.body().toString())
                     response.body()?.map { shList.add(it) }
                     viewAdapterSH.notifyDataSetChanged()
                 }
