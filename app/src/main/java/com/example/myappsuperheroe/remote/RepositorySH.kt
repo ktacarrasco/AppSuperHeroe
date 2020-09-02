@@ -36,12 +36,14 @@ class RepositorySH(context: Context) {
             override fun onResponse(call: Call<List<SuperHeroe>>, response: Response<List<SuperHeroe>>) {
                 Log.d(tag, response.body().toString())
                 CoroutineScope(Dispatchers.IO).launch {
-                    response.body()?.let { db.shDao().insertAllSH(it) }
+                    //response.body()?.let { db.shDao().insertAllSH(it) }
+                    db.shDao().insertAllSH(response.body()!!)
                 }
             }
 
             override fun onFailure(call: Call<List<SuperHeroe>>, t: Throwable) {
                 Log.d(tag, t.message.toString())
+
             }
         })
 

@@ -1,5 +1,6 @@
 package com.example.myappsuperheroe.ui.main
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,12 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_photos.view.*
 
 class AdapterSH  (var mdataSetP: List<SuperHeroe>): RecyclerView.Adapter<AdapterSH.photoHolder>(){
+
+    fun updateData(listSH: List<SuperHeroe>) {
+        Log.d("UPDATE", "update ${listSH.size}")
+        mdataSetP = listSH
+        notifyDataSetChanged()
+    }
 
         class photoHolder (itemView: View): RecyclerView.ViewHolder(itemView){
             val titleTv= itemView.titleTV
@@ -22,6 +29,7 @@ class AdapterSH  (var mdataSetP: List<SuperHeroe>): RecyclerView.Adapter<Adapter
         }
 
         override fun getItemCount(): Int {
+            Log.d("Cantidad",mdataSetP.size.toString())
             return mdataSetP.size
         }
 
