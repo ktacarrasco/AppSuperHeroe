@@ -29,7 +29,7 @@
         <ImageView
             android:id="@+id/photoTV"
             android:layout_width="match_parent"
-            android:layout_height="116dp"
+            android:layout_height="216dp"
             app:layout_constraintBottom_toTopOf="@+id/titleTV"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="117dp"
@@ -42,6 +42,8 @@
             android:layout_marginStart="35dp"
             android:layout_marginEnd="64dp"
             android:text=""
+            android:textColor="#FA0C0101"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="198dp" />

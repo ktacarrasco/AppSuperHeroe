@@ -28,13 +28,13 @@ class AdapterSH  (var mdataSetP: List<SuperHeroe>): RecyclerView.Adapter<Adapter
         override fun onBindViewHolder(holder: photoHolder, position: Int) {
             val photo =  mdataSetP[position]
 
-            val titletv ="Title: ${photo.name}"
+            val titletv ="Super Hero: ${photo.name}"
             //val phototv="images: ${Images.sm}"
 
             holder.titleTv.text = titletv
 
             Picasso.get()
-                .load(photo.images.sm)
+                .load(photo.images.lg)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(holder.photoTv)
 

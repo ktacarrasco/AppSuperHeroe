@@ -4,12 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.myappsuperheroe.pojo.Images
 import com.example.myappsuperheroe.pojo.SuperHeroe
 import com.example.myappsuperheroe.remote.RetrofitClient
-import com.example.myappsuperheroe.ui.main.AdapterImages
 import com.example.myappsuperheroe.ui.main.AdapterSH
-import com.example.myappsuperheroe.ui.main.MainFragment
 import kotlinx.android.synthetic.main.main_activity.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,10 +14,10 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-    private var photoList =  ArrayList<SuperHeroe>()
-    private var imagesList =  ArrayList<Images>()
+    private var shList =  ArrayList<SuperHeroe>()
+
     private lateinit var viewAdapterSH: AdapterSH
-    private lateinit var viewAdapterImages: AdapterImages
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,13 +28,11 @@ class MainActivity : AppCompatActivity() {
                     .commitNow()
         }*/
 
-        viewAdapterSH = AdapterSH(photoList)
+        viewAdapterSH = AdapterSH(shList)
         shRecyclerView.adapter = viewAdapterSH
 
 
         loadApiPhoto()
-
-
 
     }
 
@@ -56,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onResponse(call: Call<List<SuperHeroe>>, response: Response<List<SuperHeroe>>) {
                     Log.d("Error",response.body().toString())
-                    response.body()?.map { photoList.add(it) }
+                    response.body()?.map { shList.add(it) }
                     viewAdapterSH.notifyDataSetChanged()
                 }
 
@@ -65,25 +60,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-   /* private fun loadApiImages() {
-        val service = RetrofitClient.retrofitInstance()
-        val call= service.getImages()
 
-        call.enqueue(object : Callback<List<Images>> {
-            override fun onFailure(call: Call<List<Images>>, t: Throwable) {
-                Toast.makeText(
-                    applicationContext,
-                    "Error: no se logro recuperar los usuarios desde la api",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-
-            override fun onResponse(call: Call<List<Images>>, response: Response<List<Images>>) {
-                response.body()?.map { imagesList.add(it) }
-                viewAdapterImages.notifyDataSetChanged()
-            }
-
-        })
-    }*/
 
     }

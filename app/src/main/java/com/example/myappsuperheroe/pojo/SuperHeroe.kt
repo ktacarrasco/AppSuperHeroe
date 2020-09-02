@@ -1,6 +1,14 @@
 package com.example.myappsuperheroe.pojo
 
-class SuperHeroe (val  id : Int,
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
+
+@Entity(tableName = "SH_table")
+class SuperHeroe (@SerializedName("userId") @PrimaryKey val  id : Int,
                   val name: String,
-                  val images : Images) {
+                  @Embedded val images : Images) {
+
+
 }
