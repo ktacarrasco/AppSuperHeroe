@@ -4,13 +4,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myappsuperheroe.R
 import com.example.myappsuperheroe.pojo.SuperHeroe
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_photos.view.*
 
-class AdapterSH  (var mdataSetP: List<SuperHeroe>): RecyclerView.Adapter<AdapterSH.photoHolder>(){
+
+class AdapterSH  (var mdataSetP: List<SuperHeroe>,var listenerS : MyClickListener): RecyclerView.Adapter<AdapterSH.photoHolder>(){
+
 
     fun updateData(listSH: List<SuperHeroe>) {
         Log.d("UPDATE", "update ${listSH.size}")
@@ -46,13 +49,20 @@ class AdapterSH  (var mdataSetP: List<SuperHeroe>): RecyclerView.Adapter<Adapter
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(holder.photoTv)
 
-             /* Picasso.get()
-                   .load(mdataSetP[position].images)
-                   .into(holder.photoTv)*/
+            holder.itemView.setOnClickListener(View.OnClickListener{
 
-            //holder.photoTv.te = email
+                Toast.makeText(holder.itemView.context,"$titletv",Toast.LENGTH_SHORT).show()
+                listenerS.onItemClick(mdataSetP.get(position))
+
+            })
+
 
         }
 
+    interface MyClickListener {
 
+        fun onItemClick(superHeroe: SuperHeroe)
     }
+
+
+}
