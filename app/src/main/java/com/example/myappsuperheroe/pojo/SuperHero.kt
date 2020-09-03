@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "SH_table")
-data class SuperHeroe (@SerializedName("userId") @PrimaryKey (autoGenerate = true) val  id : Int,
-                  val name: String,
-                  @Embedded val images : Images) {
+data class SuperHero (@SerializedName("userId") @PrimaryKey (autoGenerate = true) val  id : Int,
+                      val name: String,
+                      @Embedded val images : Images) {
 
 
 }

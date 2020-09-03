@@ -5,13 +5,13 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.myappsuperheroe.pojo.SuperHeroe
+import com.example.myappsuperheroe.pojo.SuperHero
 @Dao
 interface SHDao {
 
     //Insertar un listado
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllSH(listSH: List<SuperHeroe>)
+    suspend fun insertAllSH(listSHES: List<SuperHero>)
 
     // Insertar 1 post
    /* @Insert
@@ -19,5 +19,5 @@ interface SHDao {
 
     // traer todos los elementos de la tabla
     @Query("SELECT * FROM SH_table ")
-    fun getAllSHList() : LiveData<List<SuperHeroe>>
+    fun getAllSHList() : LiveData<List<SuperHero>>
 }

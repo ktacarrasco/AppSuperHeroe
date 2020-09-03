@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.myappsuperheroe.db.SHRoomDB
-import com.example.myappsuperheroe.pojo.SuperHeroe
+import com.example.myappsuperheroe.pojo.SuperHero
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +22,7 @@ class RepositorySH(context: Context) {
     private val shList = db.shDao().getAllSHList()
 
 
-    fun passLiveDataToViewModel(): LiveData<List<SuperHeroe>> {
+    fun passLiveDataToViewModel(): LiveData<List<SuperHero>> {
         return shList
     }
 
@@ -32,8 +32,8 @@ class RepositorySH(context: Context) {
         val call = service.getPhotos()
 
 
-        call.enqueue(object : Callback<List<SuperHeroe>> {
-            override fun onResponse(call: Call<List<SuperHeroe>>, response: Response<List<SuperHeroe>>) {
+        call.enqueue(object : Callback<List<SuperHero>> {
+            override fun onResponse(call: Call<List<SuperHero>>, response: Response<List<SuperHero>>) {
                 Log.d(tag, response.body().toString())
                 CoroutineScope(Dispatchers.IO).launch {
                     //response.body()?.let { db.shDao().insertAllSH(it) }
@@ -41,7 +41,7 @@ class RepositorySH(context: Context) {
                 }
             }
 
-            override fun onFailure(call: Call<List<SuperHeroe>>, t: Throwable) {
+            override fun onFailure(call: Call<List<SuperHero>>, t: Throwable) {
                 Log.d(tag, t.message.toString())
 
             }

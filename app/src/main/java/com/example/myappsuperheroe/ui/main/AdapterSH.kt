@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myappsuperheroe.R
-import com.example.myappsuperheroe.pojo.SuperHeroe
+import com.example.myappsuperheroe.pojo.SuperHero
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_photos.view.*
 
 
-class AdapterSH  (var mdataSetP: List<SuperHeroe>,var listenerS : MyClickListener): RecyclerView.Adapter<AdapterSH.photoHolder>(){
+class AdapterSH  (var mdataSetP: List<SuperHero>, var listenerS : MainFragment): RecyclerView.Adapter<AdapterSH.photoHolder>(){
 
 
-    fun updateData(listSH: List<SuperHeroe>) {
-        Log.d("UPDATE", "update ${listSH.size}")
-        mdataSetP = listSH
+    fun updateData(listSHES: List<SuperHero>) {
+        Log.d("UPDATE", "update ${listSHES.size}")
+        mdataSetP = listSHES
         notifyDataSetChanged()
     }
 
@@ -52,7 +52,7 @@ class AdapterSH  (var mdataSetP: List<SuperHeroe>,var listenerS : MyClickListene
             holder.itemView.setOnClickListener(View.OnClickListener{
 
                 Toast.makeText(holder.itemView.context,"$titletv",Toast.LENGTH_SHORT).show()
-                listenerS.onItemClick(mdataSetP.get(position))
+               // listenerS.onItemClick(mdataSetP.get(position))
 
             })
 
@@ -61,7 +61,7 @@ class AdapterSH  (var mdataSetP: List<SuperHeroe>,var listenerS : MyClickListene
 
     interface MyClickListener {
 
-        fun onItemClick(superHeroe: SuperHeroe)
+        fun onItemClick(superHero: SuperHero)
     }
 
 

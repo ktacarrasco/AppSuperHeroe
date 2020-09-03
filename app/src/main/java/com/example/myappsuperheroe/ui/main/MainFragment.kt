@@ -1,21 +1,31 @@
 package com.example.myappsuperheroe.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myappsuperheroe.R
-import com.example.myappsuperheroe.viewmodel.SHViewModel
+import com.example.myappsuperheroe.pojo.SuperHero
+import kotlinx.android.synthetic.main.main_fragment.*
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment() , AdapterSH.MyClickListener{
+
+    private var shList =  ArrayList<SuperHero>()
+
+    private lateinit var viewAdapterSH: AdapterSH
+    private lateinit var mViewModel: MainViewModel
+    private lateinit var mFragment: MainFragment
 
     companion object {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: SHViewModel
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -24,10 +34,24 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SHViewModel::class.java)
-      //  val myAdapter = AdapterSH(this)
+        //Iniciando el ViewModel
+        mViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        // Iniciando el adapter
+        viewAdapterSH = AdapterSH(shList,this)
+        shRecyclerView.layoutManager = LinearLayoutManager(context)
+        shRecyclerView.adapter = viewAdapterSH
 
-        // TODO: Use the ViewModel
+        mViewModel.fetchFromServer()
+        mViewModel.getDataFromDB().observe(viewLifecycleOwner, Observer {
+            Log.d("cant", it.toString())
+            viewAdapterSH.updateData(it)
+
+
+        })
     }
 
+    override fun onItemClick(superHero: SuperHero) {
+
+
+    }
 }

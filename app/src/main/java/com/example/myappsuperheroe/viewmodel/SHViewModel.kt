@@ -3,7 +3,7 @@ package com.example.myappsuperheroe.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.example.myappsuperheroe.pojo.SuperHeroe
+import com.example.myappsuperheroe.pojo.SuperHero
 import com.example.myappsuperheroe.remote.RepositorySH
 
 class SHViewModel (application: Application) : AndroidViewModel(application) {
@@ -15,7 +15,7 @@ class SHViewModel (application: Application) : AndroidViewModel(application) {
         repository.fetchDataFromServer()
     }
 
-    fun getDataFromDB(): LiveData<List<SuperHeroe>> {
+    fun getDataFromDB(): LiveData<List<SuperHero>> {
         return shList
     }
 
