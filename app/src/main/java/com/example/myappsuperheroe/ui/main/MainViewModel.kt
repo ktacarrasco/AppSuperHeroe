@@ -14,7 +14,11 @@ class MainViewModel  (application: Application) : AndroidViewModel(application) 
         repository.fetchDataFromServer()
     }
 
-    fun getDataFromDB(): LiveData<List<SuperHero>> {
+    fun getDataFromDB(id: Int): LiveData<List<SuperHero>> {
         return shList
+    }
+
+    fun getIdDataFromDB(id: Int): LiveData<SuperHero> {
+        return repository.passIdtoFragment(id)
     }
 }

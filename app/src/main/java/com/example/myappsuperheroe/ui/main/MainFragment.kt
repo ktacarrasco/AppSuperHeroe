@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myappsuperheroe.R
 import com.example.myappsuperheroe.pojo.SuperHero
@@ -21,6 +22,7 @@ class MainFragment : Fragment() , AdapterSH.MyClickListener{
     private lateinit var mViewModel: MainViewModel
     private lateinit var mFragment: MainFragment
 
+
     companion object {
         fun newInstance() = MainFragment()
     }
@@ -29,7 +31,14 @@ class MainFragment : Fragment() , AdapterSH.MyClickListener{
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
+        val view :View=inflater.inflate(R.layout.main_fragment,container,false)
+
+
+        return view
+
+
+
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -42,7 +51,7 @@ class MainFragment : Fragment() , AdapterSH.MyClickListener{
         shRecyclerView.adapter = viewAdapterSH
 
         mViewModel.fetchFromServer()
-        mViewModel.getDataFromDB().observe(viewLifecycleOwner, Observer {
+        mViewModel.getDataFromDB(id).observe(viewLifecycleOwner, Observer {
             Log.d("cant", it.toString())
             viewAdapterSH.updateData(it)
 
@@ -52,6 +61,12 @@ class MainFragment : Fragment() , AdapterSH.MyClickListener{
 
     override fun onItemClick(superHero: SuperHero) {
 
+        val bundle=Bundle()
+        bundle.putInt("id",superHero.id)
+
+        findNavController().navigate(R.id.action_mainFragment_to_secondFragment,bundle)
+
 
     }
+
 }

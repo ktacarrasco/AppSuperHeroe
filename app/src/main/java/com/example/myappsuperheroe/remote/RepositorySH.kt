@@ -15,12 +15,19 @@ import retrofit2.Response
 class RepositorySH(context: Context) {
 
 
+
     private val tag = "SHRepository"
 
     //esto viene  de la Base de datos
     private val db: SHRoomDB = SHRoomDB.getDatabase(context)
     private val shList = db.shDao().getAllSHList()
+    // private val shId = db.shDao().getIdSHList( id:Int)
 
+
+    fun  passIdtoFragment(id :Int):LiveData<SuperHero>{
+
+        return  db.shDao().getIdSHList(id)
+    }
 
     fun passLiveDataToViewModel(): LiveData<List<SuperHero>> {
         return shList

@@ -15,54 +15,61 @@ import kotlinx.android.synthetic.main.item_photos.view.*
 class AdapterSH  (var mdataSetP: List<SuperHero>, var listenerS : MainFragment): RecyclerView.Adapter<AdapterSH.photoHolder>(){
 
 
-    fun updateData(listSHES: List<SuperHero>) {
-        Log.d("UPDATE", "update ${listSHES.size}")
-        mdataSetP = listSHES
+
+    fun updateData(listSH: List<SuperHero>) {
+        Log.d("UPDATE", "update ${listSH.size}")
+        mdataSetP = listSH
         notifyDataSetChanged()
     }
 
-        class photoHolder (itemView: View): RecyclerView.ViewHolder(itemView){
-            val titleTv= itemView.titleTV
-            val photoTv= itemView.photoTV
-        }
+    class photoHolder (itemView: View): RecyclerView.ViewHolder(itemView){
+        val titleTv= itemView.titleTV
+        val photoTv= itemView.photoTV
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): photoHolder {
-            val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_photos, parent, false)
-            return photoHolder(view)
-        }
+    }
 
-        override fun getItemCount(): Int {
-            Log.d("Cantidad",mdataSetP.size.toString())
-            return mdataSetP.size
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): photoHolder {
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_photos, parent, false)
 
-        override fun onBindViewHolder(holder: photoHolder, position: Int) {
-            val photo =  mdataSetP[position]
+        return photoHolder(view)
+    }
 
-            val titletv ="Super Hero: ${photo.name}"
-            //val phototv="images: ${Images.sm}"
+    override fun getItemCount(): Int {
+        Log.d("Cantidad",mdataSetP.size.toString())
+        return mdataSetP.size
+    }
 
-            holder.titleTv.text = titletv
+    override fun onBindViewHolder(holder: photoHolder, position: Int) {
+        val photo =  mdataSetP[position]
 
-            Picasso.get()
-                .load(photo.images.lg)
-                .placeholder(R.drawable.ic_launcher_foreground)
-                .into(holder.photoTv)
+        val titletv ="Super Hero: ${photo.name}"
+        //val phototv="images: ${Images.sm}"
 
-            holder.itemView.setOnClickListener(View.OnClickListener{
+        holder.titleTv.text = titletv
 
-                Toast.makeText(holder.itemView.context,"$titletv",Toast.LENGTH_SHORT).show()
-               // listenerS.onItemClick(mdataSetP.get(position))
+        Picasso.get()
+            .load(photo.images.lg)
+            .placeholder(R.drawable.ic_launcher_foreground)
+            .into(holder.photoTv)
 
-            })
+        holder.itemView.setOnClickListener(View.OnClickListener{
+
+            Toast.makeText(holder.itemView.context,"$titletv", Toast.LENGTH_SHORT).show()
+            listenerS.onItemClick(mdataSetP.get(position))
+
+        })
 
 
-        }
+    }
 
     interface MyClickListener {
 
         fun onItemClick(superHero: SuperHero)
     }
 
+    interface IAdapter{
+        fun getFromAdapter(id:Int)
+
+    }
 
 }

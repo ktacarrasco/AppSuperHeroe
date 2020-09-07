@@ -11,13 +11,18 @@ interface SHDao {
 
     //Insertar un listado
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllSH(listSHES: List<SuperHero>)
+    suspend fun insertAllSH(listSH: List<SuperHero>)
 
     // Insertar 1 post
-   /* @Insert
-    suspend fun insertPost(post: Post)*/
+    /* @Insert
+     suspend fun insertPost(post: Post)*/
 
     // traer todos los elementos de la tabla
     @Query("SELECT * FROM SH_table ")
     fun getAllSHList() : LiveData<List<SuperHero>>
+
+    //traer elemento desde id
+    @Query("SELECT * FROM SH_table WHERE id=:mId")
+    fun getIdSHList(mId:Int) : LiveData<SuperHero>
+
 }
